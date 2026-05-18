@@ -1,11 +1,10 @@
-import React from 'react';
+import React from "react";
 
 const DashboardPage = () => {
-    return (
-        <div>
-            Fuck you
-        </div>
-    );
+  return (
+  <> fuck you
+  <h3>fuchka</h3></>
+  );
 };
 
 export default DashboardPage;

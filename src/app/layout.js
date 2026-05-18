@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/component/Navbar";
 import { ToastContainer } from "react-toastify";
+import { redirect } from "next/navigation";
 
 
 const geistSans = Geist({
@@ -23,13 +24,16 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  // redirect('/dashboard')
   return (
-    <html
+    <html 
+    data-theme="light"
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable}  h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Navbar></Navbar>
+       
+      
         <main>{children}</main>
         <ToastContainer></ToastContainer>
       </body>
