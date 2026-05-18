@@ -1,23 +1,18 @@
-"use client";
+"use client"
+import { authClient } from '@/lib/auth-client';
+import { Check } from '@gravity-ui/icons';
+import { Button, Description, FieldError, Form, Input, Label, TextField } from '@heroui/react';
+import React from 'react';
+import { GrGoogle } from 'react-icons/gr';
 
-import { authClient } from "@/lib/auth-client";
-import { Check } from "@gravity-ui/icons";
-import {
-  Button,
-  Description,
-  FieldError,
-  Form,
-  Input,
-  Label,
-  TextField,
-} from "@heroui/react";
-import { error } from "better-auth/api";
-import { useRouter } from "next/navigation";
-import { GrGoogle } from "react-icons/gr";
-import { toast } from "react-toastify";
 
-function signUpPage() {
-  const router = useRouter();
+function LoginInPage() {
+  
+    const handleGoogleSignIn=async()=>{
+     const data = await authClient.signIn.social({
+    provider: "google",
+  });
+  }
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -29,18 +24,18 @@ function signUpPage() {
       return;
     } else {
       const { data, err } = await authClient.signUp.email({
-        name: datas.name,
         email: datas.email,
         password: datas.password,
       });
 
       console.log(data, err);
-      if (!err) {
-        toast.success("sign up success");
-        router.push("/");
-      } else {
-        toast.error("sign up fail please try again");
-      }
+      if(data){
+        toast.success("login success")
+        redirect("/")
+       
+    }else{
+      toast.error("login failed")
+    }
     }
     // Convert FormData to plain object
   };
@@ -53,22 +48,8 @@ function signUpPage() {
           render={(props) => <form {...props} data-custom="foo" />}
           onSubmit={onSubmit}
         >
-          <h2 className="text-center">signUp</h2>
-          <TextField
-            isRequired
-            name="name"
-            type="text"
-            validate={(value) => {
-              if (value.length < 3) {
-                return "Name must be at least 3 characters";
-              }
-              return null;
-            }}
-          >
-            <Label>Name</Label>
-            <Input placeholder="Enter Your Name" />
-            <FieldError />
-          </TextField>
+          <h2 className="text-center font-bold">Log In</h2>
+          
           <TextField
             isRequired
             name="email"
@@ -113,33 +94,6 @@ function signUpPage() {
             <FieldError />
           </TextField>
 
-          <TextField
-            isRequired
-            minLength={8}
-            name="password"
-            type="password"
-            validate={(value) => {
-              if (value.length < 8) {
-                return "Password must be at least 8 characters";
-              }
-              if (!/[A-Z]/.test(value)) {
-                return "Password must contain at least one uppercase letter";
-              }
-              if (!/[0-9]/.test(value)) {
-                return "Password must contain at least one number";
-              }
-
-              return null;
-            }}
-          >
-            <Label>Password</Label>
-            <Input placeholder="Enter your password" />
-            <Description>
-              Must be at least 8 characters with 1 uppercase and 1 number
-            </Description>
-            <FieldError />
-          </TextField>
-
           <div className="flex gap-2">
             <Button className={"bg-black"} type="submit">
               <Check />
@@ -155,7 +109,7 @@ function signUpPage() {
           </div>
           <p className="text-center font-medium">OR</p>
           <div className="flex items-center justify-center ">
-            <Button className="w-full bg-black">
+            <Button onClick={handleGoogleSignIn}  className="w-full bg-black">
               <GrGoogle />
               Sign with Google
             </Button>
@@ -165,5 +119,4 @@ function signUpPage() {
     </div>
   );
 }
-
-export default signUpPage;
+export default LoginInPage;

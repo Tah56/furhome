@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Button } from "@heroui/react";
+import { Avatar, Button, DropdownMenu } from "@heroui/react";
 import Image from "next/image";
 import dot from "../../public/assets/blob.svg";
 import dog from "../../public/assets/pet.png";
@@ -9,6 +9,9 @@ import Link from "next/link";
 import { Poppins } from "next/font/google";
 import NavLink from "./NavLInk";
 import { IoMdHome } from "react-icons/io";
+import { authClient } from "@/lib/auth-client";
+import Dropdown from "./DropDown";
+import { RiArrowDropDownLine } from "react-icons/ri";
 
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
@@ -16,6 +19,8 @@ const poppins = Poppins({
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+   const users = authClient.useSession();
+  const user = users.data?.user;
 
   return (
     <div className={`${poppins.className}`}>
@@ -75,13 +80,22 @@ export default function Navbar() {
               </NavLink>
             </li>
           </ul>
+          {
+            !user && (
           <div className="hidden items-center gap-4 md:flex">
-            <Link href="#">Login</Link>
+            <Link href="/auth/login">Login</Link>
             <Link href={"/auth/signup"}>
             
             <Button className={"bg-black"}>Sign Up</Button>
             </Link>
-          </div>
+          </div>)
+          }
+           {user && (
+            <div className="flex items-center gap-2.5 border rounded-full  hover:bg-orange-500 hover:text-white p-2">
+            <Dropdown user={user}/>
+              
+            </div>
+          )}
         </header>
         {isMenuOpen && (
           <div className="border-t border-separator md:hidden">
