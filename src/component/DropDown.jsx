@@ -44,7 +44,7 @@ export default function CustomTrigger({ user }) {
         </div>
         <Dropdown.Menu>
           <Dropdown.Item id="dashboard" textValue="Dashboard">
-            <Link href={"/dashboard"}>
+            <Link href={"/dashboard/request"}>
               <Label>Dashboard</Label>
             </Link>
           </Dropdown.Item>

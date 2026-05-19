@@ -25,7 +25,7 @@ export default function DashNav() {
   return (
     <div className={`${poppins.className}`}>
       <nav className="sticky top-0 z-40 w-full border-b border-separator bg-background/70 backdrop-blur-lg">
-        <header className="mx-auto flex h-16 container items-center justify-between px-6 border">
+        <header className=" flex h-16  items-center justify-between px-6 border">
           <div className="flex items-center gap-4">
             <button
               className="md:hidden"

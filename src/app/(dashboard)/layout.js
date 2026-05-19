@@ -1,6 +1,12 @@
+import DashLink from '@/component/DashLink';
 import DashNav from '@/component/DashNav';
+import NavLink from '@/component/NavLInk';
+import { PlusShape } from '@gravity-ui/icons';
 import Link from 'next/link';
 import React from 'react';
+import { CiHeart } from 'react-icons/ci';
+import { FaRegClipboard } from 'react-icons/fa';
+import { PiPlus } from 'react-icons/pi';
 
 const dashboardlayout = ({children}) => {
     return (
@@ -22,16 +28,17 @@ const dashboardlayout = ({children}) => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu border bg-base-200 h-screen w-60 p-4">
+        <ul className="menu border bg-base-200 h-screen w-60   p-4">
           {/* Sidebar content here */}
           <li >
-            <Link className='block' href={"/dashboard/request"}>My Requests</Link>
+            <DashLink className='  ' href={"/dashboard/request"}><FaRegClipboard />
+<h2>My Requests</h2></DashLink>
           </li>
           <li >
-            <Link className='block' href={"/dashboard/add-pet"}>Add Pet</Link>
+            <DashLink className=' ' href={"/dashboard/add-pet"}><PiPlus/>Add Pet</DashLink>
           </li>
           <li >
-            <Link className='block' href={"/dashboard/listing"}>My Listings</Link>
+            <DashLink className='' href={"/dashboard/listing"}><CiHeart />My Listings</DashLink>
           </li>
           
         </ul>
