@@ -15,7 +15,7 @@ const dashboardlayout = ({children}) => {
            
                 <div className="drawer lg:drawer-open flex flex-row-reverse justify-end">
      
-      <div className="drawer-content flex ">
+      <div className="w-full h-screen">
         {children}
         {/* Page content here */}
         <label htmlFor="my-drawer-3" className="btn drawer-button lg:hidden">

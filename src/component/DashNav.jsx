@@ -67,8 +67,21 @@ export default function DashNav() {
          
           
            {user && (
-            <div className="flex items-center gap-2.5 border rounded-full  hover:bg-orange-500 hover:text-white p-2">
-            <Dropdown user={user}/>
+            <div className="flex items-center gap-2.5  ">
+            <div className="flex items-center gap-2">
+            <Avatar size="sm">
+              <Avatar.Image
+                alt={user?.name}
+                src={user?.image}
+                referrerPolicy="no-referrer"
+              />
+              <Avatar.Fallback delayMs={600}>{user?.name[0]}</Avatar.Fallback>
+            </Avatar>
+            <div className="flex flex-col gap-0">
+              <p className="text-sm leading-5 font-medium">{`${user?.name}`.split(" ")[0] + ""}</p>
+              <p className="text-xs leading-none text-muted">{user?.email}</p>
+            </div>
+          </div>
               
             </div>
           )}
