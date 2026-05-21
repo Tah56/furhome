@@ -1,6 +1,7 @@
 "use client"
 import { authClient } from '@/lib/auth-client';
 import { Button, FieldError, Input, Label, ListBox, TextField,Select, TextArea } from '@heroui/react';
+
 import { redirect } from 'next/navigation';
 import React from 'react';
 
@@ -27,7 +28,9 @@ const AddPet = () => {
     })
     const dat= await res.json()
     console.log(dat);
-  
+    if(dat.insertedId){
+      redirect('/dashboard/listing')
+    }
     
     }
     return (

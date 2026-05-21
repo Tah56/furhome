@@ -10,22 +10,22 @@ const detailsPage = async({params}) => {
    
     const {id}= await  params
     const res = await fetch(`http://localhost:8000/list-pets/${id}`)
-    const data =await res.json()
-    console.log(data);
+    const pets =await res.json()
+    console.log(pets);
     
     return (
         <div>
-            <Image src={data?.imageUrl}
+            <Image src={pets?.imageUrl}
                 width={400}
                 height={100}
-                alt={data?.name}
+                alt={pets?.name}
             />
-            <div>
+            <Suspense>
             
 
-           <PetDetails data={data} ></PetDetails>
+           <PetDetails pets={pets} ></PetDetails>
               
-            </div>
+            </Suspense>
         </div>
     );
 };

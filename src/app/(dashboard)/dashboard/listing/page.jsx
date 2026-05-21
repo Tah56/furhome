@@ -1,3 +1,4 @@
+import { DeleteList } from '@/component/DeleteList';
 import RequestModal from '@/component/RequestModal';
 import { auth } from '@/lib/auth';
 import { Button, Card } from '@heroui/react';
@@ -18,6 +19,8 @@ console.log(user?.id);
 
   const response = await fetch(`http://localhost:8000/my-pet-requests/${user?.email}`)
   const datas =await response.json()
+  console.log(data);
+  
     return (
         <div>
             <h2>ListingPage</h2>
@@ -46,12 +49,16 @@ console.log(user?.id);
                   <h2>NAME: {list?.name}</h2>
                   <h2>Animal Type: {list?.Species}</h2>
                   <h2>Breed:{list?.breed}</h2>
-                  <h2>Price: {list?.price}</h2>
+                  <h2>Price: {list?._id}</h2>
                 </div>
-                <Link className={"ml-auto"} href={`/all-pets/${list._id}`}>
+                <div className='flex justify-between '>
+                    
+                <Link className={""} href={`/all-pets/${list._id}`}>
                   <Button>Full details</Button>
                 </Link>
-                  <RequestModal datas={datas}></RequestModal>
+                <DeleteList list={list} />
+                </div>
+                  <RequestModal datas={datas} data={data}></RequestModal>
               </Card>
             </div>
                     )

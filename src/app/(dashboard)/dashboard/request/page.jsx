@@ -1,5 +1,7 @@
+import { Delete } from '@/component/Delete';
 import { auth } from '@/lib/auth';
 import { Button, Card } from '@heroui/react';
+import { div } from 'motion/react-client';
 import { headers } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -16,41 +18,47 @@ const requestpage = async() => {
     console.log(data);
     
     return (
-        <div>
+        <div className='grid grid-cols-3'>
             <h3 className=''>
                 fuck you to jonny
+                <div>
                 {
-                data.map(list=>{
-                    return(
-                        <div key={list._id} className="w-full p-5">
-              <Card className="cursor-pointer w-full h-full shadow-2xl hover:scale-110 duration-400 ease-in-out">
+
+                    data.map(list=>{
+                        return(
+                            <div key={list._id} className="w-full  p-5">
+              <Card className="cursor-pointer w-full shadow-2xl hover:scale-110 duration-400 ease-in-out">
                 <div className="" >
                     {
                         list.imageUrl? 
                         <Image
-                        src={list.imageUrl!==""?list.imageUrl: "/"}
-                        width={1000}
-                        height={200}
-                        alt={list.name}
-                        className="object-cover rounded-t-2xl"
+                          src={list.imageUrl!==""?list.imageUrl: "/"}
+                          width={1000}
+                          height={200}
+                          alt={list.name}
+                          className="object-cover rounded-t-2xl"
                         />:<div className="w-full backdrop-brightness-90 rounded-2xl h-50 flex items-center justify-center ">{list.Species==="cat"?<sapn className=" text-5xl">🐈</sapn>:list.Species==="dog"?<sapn className=" text-5xl">🐶</sapn>:"mara kah"}</div>
                     }
                 </div>
                 <div>
                   <h2>NAME: {list?.name}</h2>
                   <h2>Animal Type: {list?.Species}</h2>
-                  <h2>Status: {list?.status}</h2>
-                  <h2>Price: {list?.price}</h2>
+                  <h2>Breed:{list?.breed}</h2>
+                  <h2>Price: {list?.petId}</h2>
                 </div>
+                <div>
+
                 <Link className={"ml-auto"} href={`/all-pets/${list.petId}`}>
                   <Button>Full details</Button>
                 </Link>
-                  {/* <RequestModal></RequestModal> */}
+                <Delete list={list}></Delete>
+                </div>
               </Card>
             </div>
                     )
                 })
             }
+            </div>
 
             </h3>
         </div>

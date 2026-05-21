@@ -5,8 +5,9 @@ import { Rocket } from "@gravity-ui/icons";
 import { Button, Modal } from "@heroui/react";
 
 export default function RequestModal({ datas }) {
-  console.log(datas);
-  
+
+
+
   return (
     <Modal>
       <Button variant="secondary">Open Modal</Button>
@@ -19,24 +20,20 @@ export default function RequestModal({ datas }) {
             </Modal.Header>
             <Modal.Body>
               {datas.map((requsts) => {
-                return(
-
-                  <><p>
-                    ReqName :
-                    {requsts.name}
-                  </p><p>
-                      {requsts.petName}
-                    </p><p>
-                      {requsts.email}
-                    </p></>
-                )
-              }
-              )}
+                return (
+                  <div key={requsts.petId}>
+                    <p>ReqName :{requsts.name}</p>
+                    <p>{requsts.petName}</p>
+                    <p>{requsts.email}</p>
+                    <p>{requsts.status}</p>
+                    <Button slot="close">Accept</Button>
+                    <Button>Rejected</Button>
+                  </div>
+                );
+              })}
             </Modal.Body>
             <Modal.Footer>
-              <Button className="w-full" slot="close">
-                Continue
-              </Button>
+              <Button className="w-full">Continue</Button>
             </Modal.Footer>
           </Modal.Dialog>
         </Modal.Container>
