@@ -7,12 +7,16 @@ import React from 'react';
 const AddPet = () => {
   const users = authClient.useSession();
     const user = users.data?.user;
+   console.log(user?.id);
    
     
     const formData = async(e)=>{
       e.preventDefault()
       const formData = new FormData(e.currentTarget);
-    const datas = Object.fromEntries(formData.entries());
+    const datas = {...Object.fromEntries(formData.entries()),
+      UserEmail:user?.email,
+      userId:user?.id
+    }
 
     const res= await fetch("http://localhost:8000/list-pets",{
       method: 'POST',
@@ -63,7 +67,7 @@ const AddPet = () => {
                   </Select.Trigger>
                   <Select.Popover>
                     <ListBox>
-                      <ListBox.Item id="Male" textValue="Male">
+                      <ListBox.Item id="ale" textValue="male">
                         Male
                         <ListBox.ItemIndicator />
                       </ListBox.Item>
@@ -92,18 +96,49 @@ const AddPet = () => {
               </TextField>
 
               {/* Duration */}
+
+              <div>
+                <Select
+                  name="Species"
+                  isRequired
+                  className="w-full"
+                  placeholder="Select Gender"
+                >
+                  <Label>Species</Label>
+                  <Select.Trigger className="rounded-2xl">
+                    <Select.Value />
+                    <Select.Indicator />
+                  </Select.Trigger>
+                  <Select.Popover>
+                    <ListBox>
+                      <ListBox.Item id="dog" textValue="dog">
+                        Dog
+                        <ListBox.ItemIndicator />
+                      </ListBox.Item>
+                      <ListBox.Item id="cat" textValue="cat">
+                        Cat
+                        <ListBox.ItemIndicator />
+                      </ListBox.Item>
+                      <ListBox.Item id="turtule" textValue="turtule">
+                        Turtle
+                        <ListBox.ItemIndicator />
+                      </ListBox.Item>
+                      </ListBox>
+                  </Select.Popover>
+                </Select>
+              </div>
               <TextField name="duration" >
                 <Label>Duration</Label>
                 <Input
                   placeholder="7 Days / 6 Nights"
                   className="rounded-2xl"
+                  type='date'
                 />
                 <FieldError />
               </TextField>
-
               {/* Departure Date */}
               <div className="md:col-span-2">
-                <TextField name="owner-email" type="email" >
+                <TextField name="email" type="email" >
                   <Label>owner email</Label>
                   <Input type="text" readOnly value={`${user?.email}`} className="rounded-2xl" />
                   <FieldError />

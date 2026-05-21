@@ -5,7 +5,7 @@ import Link from "next/link";
 import { RiArrowDropDownLine } from "react-icons/ri";
 
 export default function CustomTrigger({ user }) {
-  console.log(user);
+ 
 
   const handleSignOut = async () => {
     await authClient.signOut();
