@@ -3,11 +3,15 @@
 import { authClient } from "@/lib/auth-client";
 import { Rocket } from "@gravity-ui/icons";
 import { Button, Modal } from "@heroui/react";
-
-export default function RequestModal({ datas }) {
-
+import { redirect } from "next/navigation";
 
 
+export default function RequestModal({ datas ,data,list }) {
+
+const filters = datas.filter(pet=> pet.petId ===list._id)
+  console.log(filters);
+  
+       
   return (
     <Modal>
       <Button variant="secondary">Open Modal</Button>
@@ -19,18 +23,26 @@ export default function RequestModal({ datas }) {
               <Modal.Heading>Welcome to HeroUI</Modal.Heading>
             </Modal.Header>
             <Modal.Body>
-              {datas.map((requsts) => {
-                return (
-                  <div key={requsts.petId}>
-                    <p>ReqName :{requsts.name}</p>
-                    <p>{requsts.petName}</p>
-                    <p>{requsts.email}</p>
-                    <p>{requsts.status}</p>
+
+                  {filters.map(pet=>{
+                    
+        const filter = filters.filter(pet=> pet.petId ===list._id) 
+        console.log(filter);
+             
+         
+                    return(
+
+                      <div key={filter.petId}>
+                    <p>ReqName :{pet.name}</p>
+                    <p>{pet.petName}</p>
+                    <p>{pet.petId}</p>
+                 
                     <Button slot="close">Accept</Button>
                     <Button>Rejected</Button>
                   </div>
-                );
-              })}
+                  )
+                  })}
+             
             </Modal.Body>
             <Modal.Footer>
               <Button className="w-full">Continue</Button>

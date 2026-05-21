@@ -19,7 +19,7 @@ console.log(user?.id);
 
   const response = await fetch(`http://localhost:8000/my-pet-requests/${user?.email}`)
   const datas =await response.json()
-  console.log(data);
+  console.log(datas,data);
   
     return (
         <div>
@@ -30,6 +30,7 @@ console.log(user?.id);
 
             {
                 data.map(list=>{
+                    
                     return(
                         <div key={list._id} className="w-full p-5">
               <Card className="cursor-pointer w-full h-full shadow-2xl hover:scale-110 duration-400 ease-in-out">
@@ -58,7 +59,9 @@ console.log(user?.id);
                 </Link>
                 <DeleteList list={list} />
                 </div>
-                  <RequestModal datas={datas} data={data}></RequestModal>
+                
+                  <RequestModal datas={datas} list={list} ></RequestModal>
+              
               </Card>
             </div>
                     )

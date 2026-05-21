@@ -58,7 +58,7 @@ const PetDetails = ({ pets }) => {
   return (
     <div>
       {
-        pets?.UserEmail !== pets.email &&
+        user?.email !== pets.email &&
       <div>
          
           <Form className={`w-full max-w-96 `} onSubmit={onSubmit}>
@@ -100,9 +100,15 @@ const PetDetails = ({ pets }) => {
        
       </div>
       }
+        <div>
+        {
+
+          user?.email === pets.email && 
       <div>
-        {pets?.UserEmail === pets.email && <EditPage pets={pets}></EditPage>}
+        <EditPage pets={pets}></EditPage>
       </div>
+      }
+        </div>
     </div>
   );
 };
