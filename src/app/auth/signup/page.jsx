@@ -28,14 +28,14 @@ function signUpPage() {
       toast.error("passwords do not match");
       return;
     } else {
-      const { data, err } = await authClient.signUp.email({
+      const { data, error } = await authClient.signUp.email({
         name: datas.name,
         email: datas.email,
         password: datas.password,
       });
 
-      console.log(data, err);
-      if (!err) {
+      console.log(data, error);
+      if (data) {
         toast.success("sign up success");
         router.push("/");
       } else {

@@ -18,10 +18,10 @@ const requestpage = async() => {
     console.log(data);
     
     return (
-        <div className='grid grid-cols-3'>
+        <div>
             <h3 className=''>
                 fuck you to jonny
-                <div>
+                <div className='grid grid-cols-3'>
                 {
 
                     data.map(list=>{
@@ -48,10 +48,15 @@ const requestpage = async() => {
                 </div>
                 <div>
 
-                <Link className={"ml-auto"} href={`/all-pets/${list.petId}`}>
-                  <Button>Full details</Button>
+                <Button isDisabled={list.status==="Accept"} >
+                <Link className={"ml-auto"} href={`/all-pets/${list._id}`}>
+                    {list.status==="Accept"? "Adopted" : "Full details"}
                 </Link>
-                <Delete list={list}></Delete>
+                    </Button>
+                    {
+
+                     list.status!== "Accept" &&  <Delete list={list}></Delete>
+                    }
                 </div>
               </Card>
             </div>

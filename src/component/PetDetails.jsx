@@ -58,7 +58,7 @@ const PetDetails = ({ pets }) => {
   return (
     <div>
       {
-        user?.email !== pets.email &&
+        user?.email !== pets.email && 
       <div>
          
           <Form className={`w-full max-w-96 `} onSubmit={onSubmit}>
@@ -71,7 +71,7 @@ const PetDetails = ({ pets }) => {
                   <Input placeholder="" value={`${pets?.name}`} />
                   <FieldError />
                 </TextField>
-                <TextField isRequired name="name">
+                <TextField isRequired value={`${user?.name}`} name="name">
                   <Label>Name</Label>
                   <Input placeholder="John Doe" />
                   <FieldError />

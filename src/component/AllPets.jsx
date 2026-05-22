@@ -1,5 +1,4 @@
 import { Button, Card } from "@heroui/react";
-import { revalidatePath } from "next/cache";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -14,7 +13,8 @@ const AllPets = async () => {
   }
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-10 gap-10 place-items-center
+      
+      <div className="grid rounded-2xl border mt-10  shadow-2xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-10 gap-10 place-items-center
       ">
         {datas.map((pet) => {
           return (
@@ -38,9 +38,11 @@ const AllPets = async () => {
                   <h2>Breed:{pet?.breed}</h2>
                   <h2>Price: {pet?.price}</h2>
                 </div>
+                  <Button isDisabled={pet.status==="Accept"} >
                 <Link className={"ml-auto"} href={`/all-pets/${pet._id}`}>
-                  <Button>Full details</Button>
+                    {pet.status==="Accept"? "Adopted" : "Full details"}
                 </Link>
+                    </Button>
               </Card>
             </div>
           );

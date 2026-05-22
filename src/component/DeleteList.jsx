@@ -14,6 +14,13 @@ export function DeleteList({list}) {
         "content-type": "application/json",
       },
         })
+        
+        const response = await fetch(`http://localhost:8000/request/${list?._id}`,{
+                  method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+      },
+        })
         const data = await res.json()
         console.log(data);
         if(data){

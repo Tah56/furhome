@@ -16,7 +16,7 @@ export function Delete({list}) {
         })
         const data = await res.json()
         console.log(data);
-        if(data){
+        if(res.ok){
             redirect("/dashboard/request")
         }
         

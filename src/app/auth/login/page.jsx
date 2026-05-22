@@ -2,6 +2,7 @@
 import { authClient } from '@/lib/auth-client';
 import { Check } from '@gravity-ui/icons';
 import { Button, Description, FieldError, Form, Input, Label, TextField } from '@heroui/react';
+import { redirect } from 'next/navigation';
 import React from 'react';
 import { GrGoogle } from 'react-icons/gr';
 import { toast } from 'react-toastify';
@@ -19,17 +20,15 @@ function LoginInPage() {
     const formData = new FormData(e.currentTarget);
     const datas = Object.fromEntries(formData.entries());
 
-    if (datas.passwords !== datas.password) {
-      console.log(datas.password, datas.passwords);
-      toast.error("passwords do not match");
-      return;
-    } else {
-      const { data, err } = await authClient.signUp.email({
+   console.log(datas);
+   
+    
+      const { data, error } = await authClient.signIn.email({
         email: datas.email,
-        password: datas.password,
+        password: datas.passwords,
       });
 
-      console.log(data, err);
+      console.log(data, error);
       if(data){
         toast.success("login success")
         redirect("/")
@@ -37,7 +36,7 @@ function LoginInPage() {
     }else{
       toast.error("login failed")
     }
-    }
+    
     // Convert FormData to plain object
   };
 
