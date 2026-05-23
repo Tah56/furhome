@@ -1,31 +1,22 @@
-
 import AllPets from "@/component/AllPets";
+import Filter from "@/component/Filter";
+
 import { Skeleton, Spinner } from "@heroui/react";
 import { data } from "motion/react-client";
 import React, { Suspense } from "react";
 import { PiPawPrintBold } from "react-icons/pi";
 
-const allPetsPage = () => {
-    const onChange = (e)=>{
-         
-    
-    
-    }
+const allPetsPage = async ({searchParams}) => {
+const search = await searchParams ||''
+console.log(search);
+
   return (
     <div className="py-20">
       <div className="container  mx-auto  py-20">
         <h2 className="font-extrabold text-center text-[#5644e8] text-4xl ">
           Find Your <span className="text-black">Pets</span>
         </h2>
-        <div className="bg-[#fafbfe] shadow-2xl rounded p-5 border ">
-          <form  >
-            <input
-              type="text"
-              placeholder="search your pet"
-              className=" bg-[#fefefe] border rounded border-[#f0f2f6]"
-            />
-          </form>
-        </div>
+        <Filter></Filter>
         <Suspense
           fallback={
             <div className="grid w-full h-s container mx-auto grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -83,7 +74,7 @@ const allPetsPage = () => {
             </div>
           }
         >
-          <AllPets />
+          <AllPets search={search} />
         </Suspense>
       </div>
     </div>

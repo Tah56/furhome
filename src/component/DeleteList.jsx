@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import {AlertDialog, Button} from "@heroui/react";
 
 import { redirect } from "next/navigation";
@@ -7,11 +8,13 @@ import { redirect } from "next/navigation";
 export function DeleteList({list}) {
     console.log(list);
     const deleted = async()=>{
+      const {data:tokenData}= await authClient.token()
         
         const res = await fetch(`http://localhost:8000/list-pets/${list._id}`,{
                   method: "DELETE",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${tokenData?.token}`
       },
         })
         
@@ -19,6 +22,7 @@ export function DeleteList({list}) {
                   method: "DELETE",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${tokenData?.token}`
       },
         })
         const data = await res.json()

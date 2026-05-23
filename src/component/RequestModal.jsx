@@ -7,27 +7,32 @@ import { redirect } from "next/navigation";
 
 export default function RequestModal({ datas, data, list }) {
   const filters = datas.filter((pet) => pet.petId === list._id);
-  console.log(list._id);
- const statusUpdate = async(e) => {
-                  const value = e.target.innerText;
-                  const res = await fetch(`http://localhost:8000/my-pet-requests/${list._id}`,{
-                    method:"PATCH",
-       headers: {
-        "content-type": "application/json",
+  console.log(list);
+  const statusUpdate = async (e) => {
+    const value = e.target.innerText;
+    const {data:tokenData}= await authClient.token()
+    const res = await fetch(
+      `http://localhost:8000/my-pet-requests/${list._id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${tokenData?.token}`
+        },
+        body: JSON.stringify({
+          status: value,
+          userId,
+        }),
       },
-      body: JSON.stringify({
-        status:value
-      }),
-                  })
-                  console.log(value);
-                  const d =  res
-                  console.log(d);
-                  
-                  if(d.ok){
-                    redirect('/dashboard/listing')
-                    
-                  }
-                };
+    );
+    console.log(value);
+    const d = res;
+    console.log(d);
+
+    if (d.ok) {
+      redirect("/dashboard/listing");
+    }
+  };
   return (
     <Modal>
       <Button variant="secondary">Open Modal</Button>
@@ -43,22 +48,22 @@ export default function RequestModal({ datas, data, list }) {
                 // const filter = filters.filter((pet) => pet.petId === list._id);
                 // console.log(filter);
 
-               
                 return (
                   <div key={pet._id}>
                     <p>ReqName :{pet.name}</p>
                     <p>{pet.petName}</p>
-                    <p>{pet.petId}</p>
+                    <p>{pet.email}</p>
                     <p>{pet.status}</p>
+                    <p>{pet._id}</p>
 
-                   { pet.status!=="Accept" && <div>
-
-                    <Button onClick={statusUpdate} slot="close">
-                      Accept
-                    </Button>
-                    <Button>Rejected</Button>
-                   </div>
-                    }
+                    {pet.status !== "Accept" && (
+                      <div>
+                        <Button onClick={statusUpdate} slot="close">
+                          Accept
+                        </Button>
+                        <Button slot={"close"}>Rejected</Button>
+                      </div>
+                    )}
                   </div>
                 );
               })}

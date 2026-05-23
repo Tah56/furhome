@@ -1,15 +1,21 @@
+"use client"
 import { authClient } from "@/lib/auth-client";
 import { ArrowRightFromSquare, Gear, Persons } from "@gravity-ui/icons";
 import { Avatar, Dropdown, Label } from "@heroui/react";
+
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 import { RiArrowDropDownLine } from "react-icons/ri";
+import { toast } from "react-toastify";
 
 export default function CustomTrigger({ user }) {
- 
+ const router = useRouter()
 
   const handleSignOut = async () => {
     await authClient.signOut();
     toast.success("log out successful");
+    router.refresh()
   };
   return (
     <Dropdown>

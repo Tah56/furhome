@@ -1,16 +1,24 @@
 import { Button, Card } from "@heroui/react";
+import { revalidatePath } from "next/cache";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import React from "react";
 
 
-const AllPets = async () => {
-  const res = await fetch("http://localhost:8000/list-pets");
+const AllPets = async ({search}) => {
+  
+  const url = search.search
+    ? `http://localhost:8000/all-pets?search=${search?.search}`
+    : `http://localhost:8000/all-pets`;
+
+  const res = await fetch(url);
   const datas = await res.json();
   console.log(datas);
   if(datas){
     
   }
+  
   return (
     <div>
       

@@ -18,11 +18,14 @@ const AddPet = () => {
       UserEmail:user?.email,
       userId:user?.id
     }
+    const {data:token} = await authClient.token()
+console.log(token);
 
     const res= await fetch("http://localhost:8000/list-pets",{
       method: 'POST',
       headers:{
-        'content-type':'application/json'
+        'content-type':'application/json',
+        authorization:`Bearer ${token?.token}`
       },
       body:JSON.stringify(datas)
     })

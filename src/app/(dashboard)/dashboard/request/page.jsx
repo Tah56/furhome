@@ -13,7 +13,14 @@ const requestpage = async() => {
     })
     const user =session?.user
     console.log(user?.email);
-    const res =await fetch(`http://localhost:8000/requsts?email=${user?.email}`)
+    const {token} = await auth.api.getToken({
+        headers: await headers()
+    })
+    const res =await fetch(`http://localhost:8000/requsts?email=${user?.email}`,{
+        headers: {
+            authorization: `Bearer ${token} `
+        }
+    })
     const data = await res.json()
     console.log(data);
     
@@ -49,7 +56,7 @@ const requestpage = async() => {
                 <div>
 
                 <Button isDisabled={list.status==="Accept"} >
-                <Link className={"ml-auto"} href={`/all-pets/${list._id}`}>
+                <Link className={"ml-auto"} href={`/all-pets/${list.petId}`}>
                     {list.status==="Accept"? "Adopted" : "Full details"}
                 </Link>
                     </Button>

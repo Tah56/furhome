@@ -48,6 +48,7 @@ const PetDetails = ({ pets }) => {
     });
     const d = await res.json();
 
+
     console.log(d);
 
     if (d) {
