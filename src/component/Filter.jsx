@@ -1,70 +1,36 @@
-"use client"
-import { ListBox, Select } from "@heroui/react";
+"use client";
+import { ListBox, SearchField, Select } from "@heroui/react";
 import { Label } from "@heroui/react";
 import { useRouter } from "next/navigation";
+import { BiSearch } from "react-icons/bi";
 
 const Filter = () => {
-
   const router = useRouter();
 
   const onChange = (e) => {
-
     const value = e.target.value;
 
     router.push(
       value
         ? `http://localhost:3000/all-pets?search=${value}`
-        : `http://localhost:3000/all-pets`
+        : `http://localhost:3000/all-pets`,
     );
   };
 
   return (
-    <div>
-
-      <div className="bg-[#fafbfe] shadow-2xl rounded p-5 border">
-
+    <div className="bg-white shadow-sm border border-gray-100 rounded-3xl p-6">
+      <div className="relative">
+        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+          <BiSearch size={20} />
+        </div>
+        
         <input
           type="text"
-          name="search"
-          placeholder="search your pet"
+          placeholder="Search pets by name, breed, or location..."
           onChange={onChange}
-          
-          className="bg-[#fefefe] border rounded border-[#f0f2f6]"
+          className="w-full bg-gray-50 border border-gray-200 rounded-2xl py-3 pl-11 pr-4 text-sm focus:outline-none focus:border-purple-300 focus:ring-1 focus:ring-purple-200 transition-all"
         />
-
-        <div>
-                      <Select
-                        name="Species"
-                        isRequired
-                        className="w-full"
-                        placeholder="Select Gender"
-                        onChange={onChange}
-                        >
-                        <Label>Species</Label>
-                        <Select.Trigger className="rounded-2xl">
-                          <Select.Value />
-                          <Select.Indicator />
-                        </Select.Trigger>
-                        <Select.Popover>
-                          <ListBox>
-                            <ListBox.Item id="dog" textValue="dog">
-                              Dog
-                              <ListBox.ItemIndicator />
-                            </ListBox.Item>
-                            <ListBox.Item id="cat" textValue="cat">
-                              Cat
-                              <ListBox.ItemIndicator />
-                            </ListBox.Item>
-                            <ListBox.Item id="turtule" textValue="turtule">
-                              Turtle
-                              <ListBox.ItemIndicator />
-                            </ListBox.Item>
-                            </ListBox>
-                        </Select.Popover>
-                      </Select>
-                    </div>
-
-                          </div>
+      </div>
     </div>
   );
 };

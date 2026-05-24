@@ -41,14 +41,30 @@ function LoginInPage() {
   };
 
   return (
-    <div className="container h-screen backdrop-blur-2xl backdrop-brightness-80 mx-auto flex justify-center items-center p-6">
-      <div>
+    <div className="min-h-screen bg-linear-to-br from-[#0f0a1f] via-[#1a1038] to-[#2b145c] flex justify-center items-center p-6 overflow-hidden relative">
+       <div className="absolute top-10 left-10 w-72 h-72 bg-purple-500/30 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-10 right-10 w-72 h-72 bg-fuchsia-500/20 rounded-full blur-3xl"></div>
+      <div  className='backdrop-blur-2xl bg-white/10 border border-white/10 rounded-3xl p-8 shadow-[0_0_40px_rgba(168,85,247,0.25)]'>
+      <div className="flex flex-col items-center mb-8">
+            <div className="w-16 h-16 text-5xl rounded-2xl bg-linear-to-br from-purple-500 to-fuchsia-500 flex items-center justify-center shadow-lg shadow-purple-500/30">
+              🐾
+            </div>
+
+            <h2 className="text-3xl font-bold text-white mt-4">
+              Welcome Back
+            </h2>
+
+            <p className="text-sm text-gray-300 mt-2 text-center">
+              Login to continue your pet adoption journey 🐾
+            </p>
+          
+          </div>
+
         <Form
-          className="flex w-96 flex-col gap-4 bg-white p-5 rounded-2xl shadow-orange-400 shadow-xs"
+          className="flex  flex-col gap-4 bg-[#f3e8ff] border rounded-2xl p-5 "
           render={(props) => <form {...props} data-custom="foo" />}
           onSubmit={onSubmit}
         >
-          <h2 className="text-center font-bold">Log In</h2>
           
           <TextField
             isRequired
@@ -95,21 +111,21 @@ function LoginInPage() {
           </TextField>
 
           <div className="flex gap-2">
-            <Button className={"bg-black"} type="submit">
+            <Button className={"bg-linear-to-r from-purple-600 to-fuchsia-600"} type="submit">
               <Check />
               Submit
             </Button>
             <Button
               type="reset"
               variant="outline"
-              className={"border border-orange-500"}
+              className={"border border-purple-400/30 text-[#980ffa] hover:bg-white/10 "}
             >
               Reset
             </Button>
           </div>
           <p className="text-center font-medium">OR</p>
           <div className="flex items-center justify-center ">
-            <Button onClick={handleGoogleSignIn}  className="w-full bg-black">
+            <Button onClick={handleGoogleSignIn}  className="w-full bg-[#980ffa]">
               <GrGoogle />
               Sign with Google
             </Button>

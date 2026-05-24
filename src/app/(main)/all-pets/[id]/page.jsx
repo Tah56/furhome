@@ -24,14 +24,14 @@ const detailsPage = async({params}) => {
     console.log(pets);
     
     return (
-        <div className='container h-[80vh] mx-auto border mt-20'>
+        <div >
            
-            <Suspense>
+           
             
 
            <PetDetails pets={pets} ></PetDetails>
               
-            </Suspense>
+          
         </div>
     );
 };

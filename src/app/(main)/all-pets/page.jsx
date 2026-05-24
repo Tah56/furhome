@@ -3,19 +3,40 @@ import Filter from "@/component/Filter";
 
 import { Skeleton, Spinner } from "@heroui/react";
 import { data } from "motion/react-client";
+import Link from "next/link";
 import React, { Suspense } from "react";
 import { PiPawPrintBold } from "react-icons/pi";
 
-const allPetsPage = async ({searchParams}) => {
-const search = await searchParams ||''
-console.log(search);
+const allPetsPage = async ({ searchParams }) => {
+  const search = (await searchParams) || "";
+  console.log(search);
 
   return (
     <div className="py-20">
       <div className="container  mx-auto  py-20">
-        <h2 className="font-extrabold text-center text-[#5644e8] text-4xl ">
-          Find Your <span className="text-black">Pets</span>
-        </h2>
+        <div className="flex items-center justify-between mb-8">
+          <div>
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-purple-100 rounded-2xl flex items-center justify-center text-2xl">
+                🐾
+              </div>
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900">All Pets</h1>
+                <p className="text-gray-500 mt-1">
+                  Find your perfect furry companion ❤️
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Add Pet Button Design */}
+          <Link href={"/dashboard/add-pet"}>
+          <button className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-3 rounded-2xl shadow-lg shadow-purple-200 transition-all duration-200 hover:scale-105 active:scale-95">
+            <span className="text-xl">+</span>
+            <span>Add Pet</span>
+          </button>
+          </Link>
+        </div>
         <Filter></Filter>
         <Suspense
           fallback={

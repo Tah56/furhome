@@ -1,69 +1,65 @@
 "use client";
 
 import Image from "next/image";
-import { FloppyDisk, Heart, MapPin, Shield } from "@gravity-ui/icons";
+import { Heart, MapPin } from "@gravity-ui/icons";
 import {
   Button,
-  Calendar,
-  Description,
-  FieldError,
-  FieldGroup,
-  Fieldset,
-  Form,
   Input,
   Label,
-  Modal,
-  Surface,
   TextArea,
-  TextField,
 } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
-import { CgEditFade } from "react-icons/cg";
 import { toast } from "react-toastify";
 import Link from "next/link";
-import { EditPage } from "./EditPet";
-import { BiLocationPlus, BiMaleSign, BiPhone } from "react-icons/bi";
-import { IoCalendar } from "react-icons/io5";
+import { BiPhone } from "react-icons/bi";
 import { BsMailbox } from "react-icons/bs";
+import { useRouter } from "next/navigation";
+
+
 const PetDetails = ({ pets }) => {
-  console.log(pets);
+  const router =useRouter()
   const users = authClient.useSession();
   const user = users.data?.user;
-  console.log(user?.email, pets.email);
+
+  const isOwner = pets?.email === user?.email;
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const {data:token} = await authClient.token()
     const formData = new FormData(e.currentTarget);
     const pet = {
       ...Object.fromEntries(formData.entries()),
       OwnerEmail: pets?.email,
       petId: pets._id,
+      petName:pets.name,
       userId: user?.id,
       imageUrl: pets.imageUrl,
       status: "pending",
+      createdAt: new Date().toLocaleDateString('en-GB')
     };
-
+    
+    const {data:token} = await authClient.token();
     const res = await fetch("http://localhost:8000/list-pet", {
       method: "POST",
       headers: {
         "content-type": "application/json",
-           authorization:`Bearer ${token?.token}`
+        authorization: `Bearer ${token?.token}`
       },
       body: JSON.stringify(pet),
     });
+    
     const d = await res.json();
 
-    console.log(d);
-
-    if (d) {
-      toast.error(d.message);
+    if (d.insertedId) {
+      toast.success("Adoption request submitted! The owner will review it soon. 🐾");
+      // redirect('/all-pets'); // Uncomment if you want to redirect
+    } else {
+      toast.error(d.message || "Something went wrong");
     }
   };
 
   return (
-    <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-      <div className="bg-white dark:bg-gray-900 rounded-3xl max-w-5xl w-full max-h-[95vh] overflow-hidden shadow-2xl">
+    <div className=" flex items-center justify-center p-4">
+      <div className="bg-white dark:bg-gray-900 rounded-3xl max-w-5xl w-full max-h-[95vh] overflow-y-hidden shadow-2xl">
         
         {/* Header */}
         <div className="flex items-center justify-between border-b p-6">
@@ -72,12 +68,20 @@ const PetDetails = ({ pets }) => {
               🐾
             </div>
             <div>
-              <h1 className="text-2xl font-bold">Send Adoption Request</h1>
-              <p className="text-gray-500 dark:text-gray-400">Fill out the form below to send an adoption request for {pets.name}.</p>
+              <h1 className="text-2xl font-bold">
+                {isOwner ? "Manage Your Pet" : "Send Adoption Request"}
+              </h1>
+              <p className="text-gray-500 dark:text-gray-400">
+                {isOwner 
+                  ? `You are the owner of ${pets.name}` 
+                  : `Fill out the form below to send an adoption request for ${pets.name}.`
+                }
+              </p>
             </div>
           </div>
-          <button  className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-           
+
+          <button onClick={()=>{router.back()}} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 text-2xl">
+            ✕
           </button>
         </div>
 
@@ -85,9 +89,8 @@ const PetDetails = ({ pets }) => {
           
           {/* Left Column - Pet & Owner Info */}
           <div className="lg:w-5/12 bg-gray-50 dark:bg-gray-950 p-6 space-y-6 overflow-auto">
-            
             {/* About Pet */}
-            <div className="bg-white  rounded-2xl p-5 shadow-sm">
+            <div className="bg-white rounded-2xl p-5 shadow-sm">
               <h2 className="font-semibold text-lg mb-4">About {pets.name}</h2>
               
               <div className="flex gap-4">
@@ -125,7 +128,7 @@ const PetDetails = ({ pets }) => {
               </div>
 
               <p className="mt-4 text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                {pets.description || "Bruno is friendly, playful and loves people. He is well-trained and always ready for a game of fetch!"}
+                {pets.description || "Friendly, playful and loves people."}
               </p>
             </div>
 
@@ -135,108 +138,104 @@ const PetDetails = ({ pets }) => {
               <div className="flex gap-4">
                 <div className="w-16 h-16 rounded-full overflow-hidden">
                   <Image
-                    src="/owner-avatar.jpg" // Replace with actual owner image
-                    alt={user?.name}
+                    src="/owner-avatar.jpg"
+                    alt={pets.name}
                     width={80}
                     height={80}
                     className="object-cover"
                   />
                 </div>
                 <div>
-                  <h3 className="font-semibold">{user?.name}</h3>
+                  <h3 className="font-semibold">{pets.ownerName || "Pet Owner"}</h3>
                   <div className="space-y-1 mt-2 text-sm text-gray-600 dark:text-gray-400">
                     <p className="flex items-center gap-2">
-                      <BsMailbox size={16} /> {user?.email}
-                    </p>
-                    <p className="flex items-center gap-2">
-                      <BiPhone size={16} /> {user?.phone}
-                    </p>
-                    <p className="flex items-center gap-2">
-                      <MapPin size={16} /> {users.location}
+                      <BsMailbox size={16} /> {pets.email}
                     </p>
                   </div>
                 </div>
               </div>
             </div>
-
-            {/* Note */}
-            <div className="bg-blue-50 dark:bg-blue-950/50 border border-blue-100 dark:border-blue-900 rounded-2xl p-4 text-sm">
-              <div className="flex items-start gap-3">
-                <div className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-xs font-bold">i</div>
-                <div>
-                  <p className="font-medium">Note</p>
-                  <p className="text-gray-600 dark:text-gray-400 mt-1">
-                    Your request will be sent to the owner. They will review your application and get back to you soon.
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
 
-          {/* Right Column - Form */}
-
+          {/* Right Column - Conditional Content */}
           <div className="lg:w-7/12 p-6 space-y-6 overflow-auto">
-         <form onSubmit={onSubmit}>
-  <div>
-    <h2 className="text-xl font-semibold mb-5">Your Information</h2>
+            {isOwner ? (
+              /* Owner View */
+              <div className="flex flex-col items-center justify-center h-full text-center py-12">
+                <div className="text-6xl mb-6">👤</div>
+                <h2 className="text-2xl font-semibold mb-2">You are the owner of this pet</h2>
+                <p className="text-gray-500 mb-8 max-w-md">
+                  You cannot send an adoption request for your own pet.
+                </p>
 
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full
-    ">
-      <div>
-        <Label>Full Name <span className="text-red-500">*</span></Label>
-        <Input placeholder="Enter your full name" className="mt-1 w-full" />
-      </div>
-      <div>
-        <Label>Email Address <span className="text-red-500">*</span></Label>
-        <Input type="email" placeholder="Enter your email" className="mt-1 w-full" />
-      </div>
-    </div>
+                <Link href={`/edit-pet/${pets._id}`}>
+                  <Button className="bg-purple-600 hover:bg-purple-700 text-white px-10 py-6 text-lg rounded-2xl">
+                    Edit Pet Details
+                  </Button>
+                </Link>
 
-    <div className="mt-4">
-      <Label>Phone Number <span className="text-red-500">*</span></Label>
-      <Input type="tel" placeholder="Enter your phone number" className="mt-1  w-full" />
-    </div>
+                <p className="text-sm text-gray-500 mt-6">
+                  You can update photos, description, price, etc.
+                </p>
+              </div>
+            ) : (
+              /* Adoption Form (for non-owners) */
+              <form onSubmit={onSubmit}>
+                <div>
+                  <h2 className="text-xl font-semibold mb-5">Your Information</h2>
 
-    <div className="mt-4">
-      <Label>Address <span className="text-red-500">*</span></Label>
-      <Input placeholder="Enter your full address" className="mt-1 w-full" />
-    </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <Label>Full Name <span className="text-red-500">*</span></Label>
+                      <Input name='name' placeholder="Enter your full name" readOnly value={user?.name} className="mt-1 w-full" />
+                    </div>
+                    <div>
+                      <Label>Email Address <span className="text-red-500">*</span></Label>
+                      <Input name="email" type="email" readOnly value={user?.email} className="mt-1 w-full" />
+                    </div>
+                  </div>
 
-    <div className="mt-6">
-      <Label>Why do you want to adopt {pets?.name}? <span className="text-red-500">*</span></Label>
-      <TextArea 
-        placeholder="Tell the owner why you are a good match for Bruno..." 
-        className="mt-1 h-32 resize-y w-full
-        
-        "
-      />
-      <p className="text-right text-xs text-gray-400 mt-1">0/500</p>
-    </div>
-  </div>
+                  <div className="mt-4">
+                    <Label>Pick Up Date <span className="text-red-500">*</span></Label>
+                    <Input name='PickUp' type="date" className="mt-1 w-full" required />
+                  </div>
 
-  {/* Tip Box */}
-  <div className="bg-purple-50 dark:bg-purple-950/50 border border-purple-100 dark:border-purple-900 rounded-2xl p-4 flex gap-3">
-    <Heart className="text-purple-600 mt-0.5" size={20} />
-    <div>
-      <p className="font-medium text-purple-700 dark:text-purple-400">Be thoughtful</p>
-      <p className="text-sm text-gray-600 dark:text-gray-400">
-        A short and genuine message increases the chance of your request being accepted.
-      </p>
-    </div>
-  </div>
+                  <div className="mt-6">
+                    <Label>Why do you want to adopt {pets?.name}? <span className="text-red-500">*</span></Label>
+                    <TextArea 
+                      required
+                      name="description"
+                      placeholder="Tell the owner why you are a good match for this pet..." 
+                      className="mt-1 h-32 resize-y w-full"
+                    />
+                    <p className="text-right text-xs text-gray-400 mt-1">0/500</p>
+                  </div>
+                </div>
 
-  {/* Buttons */}
-  <div className="flex gap-3 pt-4">
-    <Button variant="outline" className="flex-1 py-6 text-base">
-      Cancel
-    </Button>
-    <Button type="submit" className="flex-1 py-6 text-base bg-purple-600 hover:bg-purple-700">
-      Send Adoption Request
-    </Button>
-  </div>
-</form>
+                {/* Tip Box */}
+                <div className="bg-purple-50 dark:bg-purple-950/50 border border-purple-100 dark:border-purple-900 rounded-2xl p-4 flex gap-3 mt-6">
+                  <Heart className="text-purple-600 mt-0.5" size={20} />
+                  <div>
+                    <p className="font-medium text-purple-700 dark:text-purple-400">Be thoughtful</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      A short and genuine message increases the chance of your request being accepted.
+                    </p>
+                  </div>
+                </div>
 
-            <p className="text-center text-xs text-gray-500 dark:text-gray-400 flex items-center justify-center gap-1">
+                {/* Buttons */}
+                <div className="flex gap-3 pt-6">
+                  <Button variant="outline" className="flex-1 py-6 text-base">
+                    Cancel
+                  </Button>
+                  <Button type="submit" className="flex-1 py-6 text-base bg-purple-600 hover:bg-purple-700">
+                    Send Adoption Request
+                  </Button>
+                </div>
+              </form>
+            )}
+
+            <p className="text-center text-xs text-gray-500 dark:text-gray-400 flex items-center justify-center gap-1 mt-4">
               🔒 Your information is safe and will only be shared with the pet owner.
             </p>
           </div>

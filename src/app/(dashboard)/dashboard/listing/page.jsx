@@ -7,76 +7,101 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-const ListingPage  = async() => {
-    const session = await auth.api.getSession({
-    headers: await headers() // you need to pass the headers object.
-})
-const user =session?.user
-console.log(user?.id);
- const {token} = await auth.api.getToken({
-    headers: await headers( )
-   })
+const ListingPage = async () => {
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
 
-const res = await fetch(`http://localhost:8000/listing/${user?.id}`,{
-    headers:{
-        authorization:`Bearer ${token}`
-    }
-})
-    const data =await res.json()
+  const user = session?.user;
+  const { token } = await auth.api.getToken({
+    headers: await headers()
+  });
 
-  const response = await fetch(`http://localhost:8000/my-pet-requests/${user?.email}`)
-  const datas =await response.json()
-  console.log(datas,data);
-  
-    return (
-        <div>
-            <h2>ListingPage</h2>
-            <div  className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-10 gap-2 place-items-center
-      ">
+  const res = await fetch(`http://localhost:8000/listing/${user?.id}`, {
+    headers: {
+      authorization: `Bearer ${token}`
+    },
+    cache: 'no-store'
+  });
 
+  const data = await res.json();
 
-            {
-                data.map(list=>{
-                    
-                    return(
-                        <div key={list._id} className="w-full p-5">
-              <Card className="cursor-pointer w-full h-full shadow-2xl hover:scale-110 duration-400 ease-in-out">
-                <div className="" >
-                    {
-                        list.imageUrl? 
-                        <Image
-                        src={list.imageUrl!==""?list.imageUrl: "/"}
-                        width={1000}
-                        height={200}
-                        alt={list.name}
-                        className="object-cover rounded-t-2xl"
-                        />:<div className="w-full backdrop-brightness-90 rounded-2xl h-50 flex items-center justify-center ">{list.Species==="cat"?<sapn className=" text-5xl">🐈</sapn>:list.Species==="dog"?<sapn className=" text-5xl">🐶</sapn>:"mara kah"}</div>
-                    }
-                </div>
-                <div>
-                  <h2>NAME: {list?.name}</h2>
-                  <h2>Animal Type: {list?.Species}</h2>
-                  <h2>Breed:{list?.breed}</h2>
-                  <h2>Price: {list?._id}</h2>
-                </div>
-                <div className='flex justify-between '>
-                    
-                <Link className={""} href={`/all-pets/${list._id}`}>
-                  <Button>Full details</Button>
-                </Link>
-                <DeleteList list={list} />
-                </div>
-                
-                  <RequestModal datas={datas} list={list} ></RequestModal>
-              
-              </Card>
-            </div>
-                    )
-                })
-            }
-            </div>
+  const response = await fetch(`http://localhost:8000/my-pet-requests/${user?.email}`);
+  const datas = await response.json();
+
+  return (
+    <div className="min-h-screen bg-gray-50 py-10">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="mb-10">
+          <h1 className="text-4xl font-bold text-gray-900">My Listed Pets</h1>
+          <p className="text-gray-600 mt-2">Manage all your pets available for adoption</p>
         </div>
-    );
+
+        {data.length === 0 ? (
+          <div className="text-center py-20 bg-white rounded-3xl">
+            <p className="text-6xl mb-4">🐾</p>
+            <h3 className="text-2xl font-semibold">No Pets Listed Yet</h3>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {data.map((list) => (
+              <div key={list._id} className="w-full">
+                <Card className="cursor-pointer w-full h-full shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 rounded-3xl overflow-hidden bg-white">
+                  
+                  {/* Image Section */}
+                  <div className="relative">
+                    {list.imageUrl ? (
+                      <Image
+                        src={list.imageUrl}
+                        width={1000}
+                        height={250}
+                        alt={list.name}
+                        className="w-full h-57.5 object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-57.5 bg-gray-100 flex items-center justify-center">
+                        {list.Species === "cat" ? (
+                          <span className="text-6xl">🐱</span>
+                        ) : list.Species === "dog" ? (
+                          <span className="text-6xl">🐶</span>
+                        ) : (
+                          <span className="text-5xl">🐾</span>
+                        )}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-5 space-y-3 flex-1">
+                    <h2 className="text-xl font-bold text-gray-900">{list.name}</h2>
+                    <div className="space-y-1 text-sm text-gray-600">
+                      <p><strong>Species:</strong> {list.Species}</p>
+                      <p><strong>Breed:</strong> {list.breed}</p>
+                      <p><strong>Price:</strong> ৳{list.price || "N/A"}</p>
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="p-5 pt-0 flex flex-col gap-3">
+                    <Link href={`/all-pets/${list._id}`}>
+                      <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white rounded-2xl py-6">
+                        View Full Details
+                      </Button>
+                    </Link>
+
+                    <div className="flex gap-3">
+                      <DeleteList list={list} />
+                      <RequestModal datas={datas} list={list} />
+                    </div>
+                  </div>
+                </Card>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default ListingPage;

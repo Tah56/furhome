@@ -20,7 +20,7 @@ export default function CustomTrigger({ user }) {
   return (
     <Dropdown>
       <Dropdown.Trigger className="rounded-full flex items-center space-x-5">
-        <Avatar>
+        <Avatar >
           <Avatar.Image
             alt={user?.name}
             src={user?.image}
@@ -28,7 +28,7 @@ export default function CustomTrigger({ user }) {
           />
           <Avatar.Fallback delayMs={600}>{user?.name[0]}</Avatar.Fallback>
         </Avatar>
-        <h2 className="font-bold">{`${user?.name}`.split(" ")[0] + ""}</h2>
+        <h2 className="font-bold hidden md:flex lg:flex ">{`${user?.name}`.split(" ")[0] + ""}</h2>
         <RiArrowDropDownLine />
       </Dropdown.Trigger>
       <Dropdown.Popover>
