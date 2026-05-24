@@ -24,12 +24,8 @@ const detailsPage = async({params}) => {
     console.log(pets);
     
     return (
-        <div>
-            <Image src={pets?.imageUrl}
-                width={400}
-                height={100}
-                alt={pets?.name}
-            />
+        <div className='container h-[80vh] mx-auto border mt-20'>
+           
             <Suspense>
             
 

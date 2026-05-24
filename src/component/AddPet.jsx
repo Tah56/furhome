@@ -73,7 +73,7 @@ console.log(token);
                   </Select.Trigger>
                   <Select.Popover>
                     <ListBox>
-                      <ListBox.Item id="ale" textValue="male">
+                      <ListBox.Item id="male" textValue="male">
                         Male
                         <ListBox.ItemIndicator />
                       </ListBox.Item>

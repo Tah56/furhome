@@ -1,11 +1,15 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import {Envelope} from "@gravity-ui/icons";
 import {Button, FieldError, Input, Label, Modal, Surface, Select,TextField, ListBox, TextArea} from "@heroui/react";
 
 export function EditPage({pets}) {
 
   const EditFormData = async(e)=>{
+      const {data:token} = await authClient.token()
+console.log(token);
+
      e.preventDefault()
       const formData = new FormData(e.currentTarget);
     const datas = Object.fromEntries(formData.entries())
@@ -14,6 +18,7 @@ export function EditPage({pets}) {
       method:"PATCH",
        headers: {
         "content-type": "application/json",
+        authorization:`Bearer ${token?.token}`
       },
       body: JSON.stringify(datas),
     })
