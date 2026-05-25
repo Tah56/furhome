@@ -38,7 +38,7 @@ const Banner = () => {
             </Link>
 
             <Link
-              href="/add-pet"
+              href="/dashboard/add-pet"
               className="flex items-center gap-3 border-2 border-gray-800 hover:bg-gray-900 hover:text-white font-semibold px-8 py-4 rounded-2xl transition-all hover:scale-105 text-lg"
             >
               List Your Pet

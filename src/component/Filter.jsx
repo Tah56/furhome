@@ -1,4 +1,5 @@
 "use client";
+import { authClient } from "@/lib/auth-client";
 import { ListBox, SearchField, Select } from "@heroui/react";
 import { Label } from "@heroui/react";
 import { useRouter } from "next/navigation";
@@ -13,7 +14,7 @@ const Filter = () => {
     router.push(
       value
         ? `http://localhost:3000/all-pets?search=${value}`
-        : `http://localhost:3000/all-pets`,
+        : `http://localhost:3000/all-pets`,{},
     );
   };
 

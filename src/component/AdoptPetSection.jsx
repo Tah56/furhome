@@ -1,33 +1,30 @@
-import { auth } from "@/lib/auth";
-import { authClient } from "@/lib/auth-client";
+import { ArrowRight } from "@gravity-ui/icons";
 import { Button, Card } from "@heroui/react";
-import { revalidatePath } from "next/cache";
-import { headers } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import React from "react";
+import { BiRightArrow } from "react-icons/bi";
+import { FaArrowRightLong } from "react-icons/fa6";
 
-const AllPets = async ({ search }) => {
-     
-     const url = search.search
-     ? `http://localhost:8000/all-pets?search=${search?.search}`
-     : `http://localhost:8000/all-pets`;
-     
-   
-  const res = await fetch(url);
-  const datas = await res.json();
-  console.log(datas);
-  if (datas) {
-  }
+
+const AdoptPetSection = async() => {
+    const res  = await fetch(`http://localhost:8000/all-pet`)
+    const data = await res.json()
+    console.log(data);
+    
+
 
   return (
-    <div>
-      <div
-        className="grid rounded-2xl border mt-10  shadow-2xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-10 gap-10 place-items-center
+    <div className="py-10 bg-[#faf5ff]">
+      <div className="container mx-auto ">
+        <div>
+        <h2 className="text-4xl font-bold text-center">Pets Available For <span className="text-[#980ffa]">Adaption</span></h2>
+        <p className="text-center mt-5 text-gray-600">These wonderful pets are waiting for their forever homes. <br /> Will you be the one to change their lives?</p>
+        </div>
+         <div
+        className="grid rounded-2xl  mt-10  shadow-2xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-10 gap-10 place-items-center
       "
       >
-        {datas.map((pet) => {
+        {data.map((pet) => {
           return (
             <div key={pet._id} className="w-full p-5">
               <Card className="cursor-pointer w-full overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 rounded-3xl group">
@@ -107,8 +104,19 @@ const AllPets = async ({ search }) => {
           );
         })}
       </div>
+      <div className=" flex  justify-center items-center mt-10">
+
+       <Link
+              href="/all-pets"
+              className="flex items-center gap-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold px-8 py-4 rounded-2xl transition-all hover:scale-105 shadow-lg shadow-purple-200 text-lg group"
+            >
+              Browse Pets
+              <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
+            </Link>
+      </div>
+      </div>
     </div>
   );
 };
 
-export default AllPets;
+export default AdoptPetSection;
