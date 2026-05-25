@@ -14,6 +14,7 @@ import Link from "next/link";
 import { BiPhone } from "react-icons/bi";
 import { BsMailbox } from "react-icons/bs";
 import { useRouter } from "next/navigation";
+import { EditPage } from "./EditPet";
 
 
 const PetDetails = ({ pets }) => {
@@ -138,10 +139,11 @@ const PetDetails = ({ pets }) => {
               <div className="flex gap-4">
                 <div className="w-16 h-16 rounded-full overflow-hidden">
                   <Image
-                    src="/owner-avatar.jpg"
+                    src={pets?.image}
                     alt={pets.name}
                     width={80}
                     height={80}
+                     referrerPolicy="no-referrer"
                     className="object-cover"
                   />
                 </div>
@@ -168,11 +170,11 @@ const PetDetails = ({ pets }) => {
                   You cannot send an adoption request for your own pet.
                 </p>
 
-                <Link href={`/edit-pet/${pets._id}`}>
-                  <Button className="bg-purple-600 hover:bg-purple-700 text-white px-10 py-6 text-lg rounded-2xl">
-                    Edit Pet Details
-                  </Button>
-                </Link>
+               
+              
+                    <EditPage  pets={pets}></EditPage>
+                  
+                
 
                 <p className="text-sm text-gray-500 mt-6">
                   You can update photos, description, price, etc.
