@@ -76,10 +76,10 @@ const AddPet = () => {
           </TextField>
 
           <div>
-            <Select name="Species" isRequired>
+            <Select name="Species" placeholder="Select Species" isRequired>
               <Label>Species</Label>
               <Select.Trigger className="rounded-2xl">
-                <Select.Value placeholder="Select Species" />
+                <Select.Value  />
                 <Select.Indicator />
               </Select.Trigger>
               <Select.Popover>
@@ -102,10 +102,10 @@ const AddPet = () => {
           </div>
 
           <div>
-            <Select name="gender" isRequired>
+            <Select placeholder="Select Gender" name="gender" isRequired>
               <Label>Gender</Label>
               <Select.Trigger className="rounded-2xl">
-                <Select.Value placeholder="Select Gender" />
+                <Select.Value  />
                 <Select.Indicator />
               </Select.Trigger>
               <Select.Popover>
@@ -137,10 +137,10 @@ const AddPet = () => {
           </TextField>
 
           <div>
-            <Select name="vaccine" isRequired>
+            <Select name="vaccine" placeholder="Vaccination Status" isRequired>
               <Label>Vaccination Status</Label>
               <Select.Trigger className="rounded-2xl">
-                <Select.Value placeholder="Vaccination Status" />
+                <Select.Value  />
                 <Select.Indicator />
               </Select.Trigger>
               <Select.Popover>
