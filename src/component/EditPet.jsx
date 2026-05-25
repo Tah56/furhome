@@ -48,7 +48,7 @@ console.log(token);
                             className="p-10 space-y-8"
                           >
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                              {/* Destination Name */}
+                             
                               <div className="md:col-span-2">
                                 <TextField defaultValue={pets.name} name="name" isRequired>
                                   <Label>Pet Name</Label>
@@ -57,14 +57,14 @@ console.log(token);
                                 </TextField>
                               </div>
                 
-                              {/* Country */}
+                          
                               <TextField defaultValue={pets.breed} name="breed" isRequired>
                                 <Label>breed</Label>
                                 <Input  placeholder="german sheperd" className="rounded-2xl" />
                                 <FieldError />
                               </TextField>
                 
-                              {/* Category - Updated Select Component */}
+                           
                               <div>
                                 <Select
                                   name="gender"
@@ -97,7 +97,6 @@ console.log(token);
                                 </Select>
                               </div>
                 
-                              {/* Price */}
                               <TextField      defaultValue={`${pets.locaiton}`} name="locaiton" type="text" isRequired>
                                 <Label>Location</Label>
                                 <Input
@@ -109,7 +108,7 @@ console.log(token);
                                 <FieldError />
                               </TextField>
                 
-                              {/* Duration */}
+                         
                 
                               <div>
                                 <Select
@@ -143,7 +142,7 @@ console.log(token);
                                 </Select>
                               </div>
                               
-                              {/* Departure Date */}
+                            
                               <div className="md:col-span-2">
                                 <TextField name="email" type="email" >
                                   <Label>owner email</Label>
@@ -152,7 +151,7 @@ console.log(token);
                                 </TextField>
                               </div>
                 
-                              {/* Image URL - Removed preview */}
+                          
                               <div className="md:col-span-2">
                                 <TextField defaultValue={pets.imageUrl} name="imageUrl" >
                                   <Label>Image URL</Label>
@@ -165,7 +164,7 @@ console.log(token);
                                 </TextField>
                               </div>
                 
-                              {/* Description */}
+                            
                               <div className="md:col-span-2">
                                 <TextField defaultValue={pets.description} name="description" isRequired>
                                   <Label>Description</Label>
@@ -178,7 +177,7 @@ console.log(token);
                               </div>
                             </div>
                 
-                            {/* Buttons */}
+                      
                 
                            
           

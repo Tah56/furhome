@@ -28,7 +28,7 @@ export default function Navbar() {
       <nav className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-lg border-b border-gray-100 shadow-sm">
         <header className="flex h-16 items-center justify-between px-4 md:px-10">
           
-          {/* Logo */}
+          
           <div className="flex items-center gap-3">
             <Link href="/" className="flex items-center gap-2">
               <div className="w-9 h-9 bg-purple-100 rounded-2xl flex items-center justify-center text-2xl">
@@ -38,7 +38,7 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
+          
           <ul className="hidden md:flex items-center gap-8 font-medium text-gray-700">
             <li>
               <NavLink href="/" className="flex items-center gap-1.5 hover:text-purple-600 transition-colors">
@@ -56,7 +56,7 @@ export default function Navbar() {
             </li>
           </ul>
 
-          {/* Auth Section */}
+         
           <div className="flex items-center gap-4">
             {!user ? (
               <div className="hidden md:flex items-center gap-4">
@@ -78,7 +78,6 @@ export default function Navbar() {
               </div>
             )}
 
-            {/* Mobile Menu Button */}
             <button
               className="md:hidden text-gray-700"
               onClick={() => setIsMenuOpen(!isMenuOpen)}

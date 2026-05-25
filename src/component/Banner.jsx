@@ -6,12 +6,12 @@ import React from "react";
 const Banner = () => {
   return (
   <div className="relative min-h-[90vh] flex items-center bg-linear-to-br from-purple-50 via-white to-pink-50 overflow-hidden">
-      {/* Background Decorative Elements */}
+     
       <div className="absolute inset-0 bg-[radial-gradient(#c026d3_0.5px,transparent_1px)] bg-size-[40px_40px] opacity-10"></div>
 
       <div className="max-w-7xl mx-auto px-6 md:px-10 grid md:grid-cols-2 gap-12 items-center relative z-10 py-20">
         
-        {/* Left Content */}
+        
         <div className="space-y-8 animate-fade-in">
           <div className="inline-flex items-center gap-2 bg-white rounded-full px-5 py-2 shadow-sm animate-slide-up">
             <Heart className="text-pink-500" size={20} />
@@ -45,7 +45,7 @@ const Banner = () => {
             </Link>
           </div>
 
-          {/* Trust Stats */}
+          
           <div className="flex items-center gap-8 pt-6 animate-slide-up delay-700">
             <div>
               <p className="text-3xl font-bold text-gray-900">500+</p>
@@ -62,7 +62,7 @@ const Banner = () => {
           </div>
         </div>
 
-        {/* Right Image Section - Fixed Structure */}
+       
         <div className="relative hidden md:block animate-fade-in delay-200">
           <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl">
             <Image
@@ -75,7 +75,7 @@ const Banner = () => {
             />
           </div>
 
-          {/* Floating Badges - Now properly positioned */}
+      
           <div className="absolute -top-6 -left-6 bg-white rounded-2xl shadow-xl p-4 flex items-center gap-3 animate-float z-10">
             <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center text-3xl">🐶</div>
             <div>

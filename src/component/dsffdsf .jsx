@@ -53,7 +53,6 @@ function LoginInPage() {
   return (
     <div className="min-h-screen bg-linear-to-br from-[#0f0a1f] via-[#1a1038] to-[#2b145c] flex justify-center items-center p-6 overflow-hidden relative">
       
-      {/* Background Blur */}
       <div className="absolute top-10 left-10 w-72 h-72 bg-purple-500/30 rounded-full blur-3xl"></div>
       <div className="absolute bottom-10 right-10 w-72 h-72 bg-fuchsia-500/20 rounded-full blur-3xl"></div>
 
@@ -61,7 +60,7 @@ function LoginInPage() {
         
         <div className="backdrop-blur-2xl bg-white/10 border border-white/10 rounded-3xl p-8 shadow-[0_0_40px_rgba(168,85,247,0.25)]">
           
-          {/* Logo */}
+        
           <div className="flex flex-col items-center mb-8">
             <div className="w-16 h-16 rounded-2xl bg-linear-to-br from-purple-500 to-fuchsia-500 flex items-center justify-center shadow-lg shadow-purple-500/30">
               <Sparkles className="text-white" size={30} />
@@ -81,7 +80,7 @@ function LoginInPage() {
             render={(props) => <form {...props} />}
             onSubmit={onSubmit}
           >
-            {/* Email */}
+            
             <TextField
               isRequired
               name="email"
@@ -106,7 +105,7 @@ function LoginInPage() {
               <FieldError className="text-red-400 text-sm" />
             </TextField>
 
-            {/* Password */}
+         
             <TextField
               isRequired
               minLength={8}
@@ -142,7 +141,7 @@ function LoginInPage() {
               <FieldError className="text-red-400 text-sm" />
             </TextField>
 
-            {/* Buttons */}
+       
             <div className="flex gap-3 mt-2">
               <Button
                 className="flex-1 bg-linear-to-r from-purple-600 to-fuchsia-600 text-white font-semibold py-6 shadow-lg hover:scale-105 transition-all duration-300"
@@ -161,7 +160,6 @@ function LoginInPage() {
               </Button>
             </div>
 
-            {/* Divider */}
             <div className="relative flex items-center justify-center my-2">
               <div className="w-full border-t border-white/10"></div>
 
@@ -172,7 +170,7 @@ function LoginInPage() {
               <div className="w-full border-t border-white/10"></div>
             </div>
 
-            {/* Google Login */}
+           
             <Button
               onClick={handleGoogleSignIn}
               className="w-full bg-white/10 hover:bg-white/20 text-white border border-white/10 py-6 transition-all duration-300"

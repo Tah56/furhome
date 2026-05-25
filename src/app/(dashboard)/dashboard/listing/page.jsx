@@ -48,7 +48,7 @@ const ListingPage = async () => {
               <div key={list._id} className="w-full">
                 <Card className="cursor-pointer w-full h-full shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 rounded-3xl overflow-hidden bg-white">
                   
-                  {/* Image Section */}
+             
                   <div className="relative">
                     {list.imageUrl ? (
                       <Image
@@ -71,7 +71,7 @@ const ListingPage = async () => {
                     )}
                   </div>
 
-                  {/* Content */}
+                
                   <div className="p-5 space-y-3 flex-1">
                     <h2 className="text-xl font-bold text-gray-900">{list.name}</h2>
                     <div className="space-y-1 text-sm text-gray-600">
@@ -81,7 +81,7 @@ const ListingPage = async () => {
                     </div>
                   </div>
 
-                  {/* Action Buttons */}
+            
                   <div className="p-5 pt-0 flex flex-col gap-3">
                     <Link href={`/all-pets/${list._id}`}>
                       <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white rounded-2xl py-6">

@@ -6,7 +6,7 @@ import { Avatar, Button } from "@heroui/react";
 import { Poppins } from "next/font/google";
 import { IoMdHome } from "react-icons/io";
 import { authClient } from "@/lib/auth-client";
-import Dropdown from "./DropDown"; // Your CustomTrigger component
+import Dropdown from "./DropDown";
 import DashLink from "./DashLink";
 import { FaRegClipboard } from "react-icons/fa";
 import { PiPlus } from "react-icons/pi";
@@ -36,36 +36,8 @@ export default function DashNav() {
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
-          <ul className="hidden md:flex items-center gap-8 font-medium text-gray-700">
-            <li>
-              <Link 
-                href="/" 
-                className="flex items-center gap-1.5 hover:text-purple-600 transition-colors"
-              >
-                <IoMdHome size={20} />
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link 
-                href="/all-pets" 
-                className="hover:text-purple-600 transition-colors"
-              >
-                All Pets
-              </Link>
-            </li>
-            <li>
-              <Link 
-                href="/my-pets" 
-                className="hover:text-purple-600 transition-colors"
-              >
-                My Pets
-              </Link>
-            </li>
-          </ul>
 
-          {/* User Section */}
+        
           {user && (
             <div className="hidden md:flex lg:flex items-center">
               <Dropdown user={user} />
@@ -73,7 +45,7 @@ export default function DashNav() {
           
           )}
 
-          {/* Mobile Menu Button */}
+    
           <button
             className="md:hidden text-gray-700 p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -93,7 +65,6 @@ export default function DashNav() {
           </button>
         </header>
 
-        {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden border-t border-gray-100 bg-white">
             <ul className="flex flex-col px-6 py-6 space-y-4 text-gray-700 font-medium">

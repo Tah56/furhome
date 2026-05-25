@@ -29,7 +29,7 @@ const allPetsPage = async ({ searchParams }) => {
             </div>
           </div>
 
-          {/* Add Pet Button Design */}
+       
           <Link href={"/dashboard/add-pet"}>
           <button className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-3 rounded-2xl shadow-lg shadow-purple-200 transition-all duration-200 hover:scale-105 active:scale-95">
             <span className="text-xl">+</span>

@@ -68,7 +68,7 @@ const RequestPage = async () => {
                     </div>
                   </div>
 
-                  {/* Content */}
+               
                   <div className="p-5 flex-1 flex flex-col">
                     <h3 className="text-xl font-bold text-gray-900 capitalize">{list.petName}</h3>
                     <p className="text-gray-500 text-sm mt-1">{list.breed}</p>
