@@ -9,9 +9,9 @@ import {
   TextField,
   ListBox,
 } from "@heroui/react";
-import { redirect, useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import React from "react";
+import { redirect } from "next/navigation";
 
 const AddPet = () => {
   const users = authClient.useSession();
@@ -29,7 +29,6 @@ const AddPet = () => {
       createdAt: new Date().toISOString(),
     };
 
-    try {
       const { data: token } = await authClient.token();
 
       const res = await fetch("http://localhost:8000/list-pets", {
@@ -42,17 +41,17 @@ const AddPet = () => {
       });
 
       const result = await res.json();
+console.log(token?.token);
 
+      console.log(result);
       if (result.insertedId) {
+        
         toast.success("Pet added successfully! 🐾");
         redirect("/dashboard/listing");
       } else {
         toast.error(result.message || "Failed to add pet");
       }
-    } catch (error) {
-      toast.error("Something went wrong");
-      console.error(error);
-    }
+    
   };
 
   return (

@@ -89,7 +89,7 @@ const ListingPage = async () => {
                       </Button>
                     </Link>
 
-                    <div className="flex gap-3">
+                    <div className="flex flex-col md:flex gap-3">
                       <DeleteList list={list} />
                       <RequestModal datas={datas} list={list} />
                     </div>

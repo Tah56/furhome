@@ -51,7 +51,7 @@ const PetDetails = ({ pets }) => {
 
     if (d.insertedId) {
       toast.success("Adoption request submitted! The owner will review it soon. 🐾");
-      // redirect('/all-pets'); // Uncomment if you want to redirect
+      redirect('/all-pets'); 
     } else {
       toast.error(d.message || "Something went wrong");
     }
@@ -59,7 +59,7 @@ const PetDetails = ({ pets }) => {
 
   return (
     <div className=" flex items-center justify-center p-4">
-      <div className="bg-white dark:bg-gray-900 rounded-3xl max-w-5xl w-full max-h-[95vh] overflow-y-hidden shadow-2xl">
+      <div className="bg-white dark:bg-gray-900 rounded-3xl max-w-5xl w-full max-h-[95vh] overflow-y-auto shadow-2xl">
         
         {/* Header */}
         <div className="flex items-center justify-between border-b p-6">
@@ -90,7 +90,7 @@ const PetDetails = ({ pets }) => {
           {/* Left Column - Pet & Owner Info */}
           <div className="lg:w-5/12 bg-gray-50 dark:bg-gray-950 p-6 space-y-6 overflow-auto">
             {/* About Pet */}
-            <div className="bg-white rounded-2xl p-5 shadow-sm">
+            <div className="bg-white rounded-2xl p-2 shadow-sm">
               <h2 className="font-semibold text-lg mb-4">About {pets.name}</h2>
               
               <div className="flex gap-4">
@@ -178,7 +178,7 @@ const PetDetails = ({ pets }) => {
                   You can update photos, description, price, etc.
                 </p>
               </div>
-            ) : (
+            ) :  (
               /* Adoption Form (for non-owners) */
               <form onSubmit={onSubmit}>
                 <div>
@@ -229,7 +229,7 @@ const PetDetails = ({ pets }) => {
                     Cancel
                   </Button>
                   <Button type="submit" className="flex-1 py-6 text-base bg-purple-600 hover:bg-purple-700">
-                    Send Adoption Request
+                 Adoption Request
                   </Button>
                 </div>
               </form>

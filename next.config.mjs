@@ -25,6 +25,13 @@ const nextConfig = {
   
      
       },
+      {
+        protocol: 'https',
+        hostname: 'www.istockphoto.com',
+        pathname: '/**',
+  
+     
+      },
     ],
   },
 };

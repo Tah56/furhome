@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
+import { BiRightArrow, BiSolidRightArrow } from "react-icons/bi";
 
 const AllPets = async ({ search }) => {
      
@@ -91,15 +92,24 @@ const AllPets = async ({ search }) => {
 
                   <Button
                     className="mt-4 w-full bg-purple-100 hover:bg-purple-200 text-purple-700 font-medium py-3 rounded-2xl text-sm transition-all"
-                    disabled={pet.status === "Accept"}
-                  >
-                    <Link
+                    isDisabled={pet.status === "Accept"}
+                  > 
+                    {
+                       pet.status !== "Accept" ? (
+                      <Link
                       href={`/all-pets/${pet._id}`}
                       className="w-full flex items-center justify-center gap-2"
                     >
                       {pet.status === "Accept" ? "Adopted" : "Adopt Now"}
-                      {!pet.status && <span className="text-lg">→</span>}
+                      {pet.status && <span className="text-lg">→</span>}
                     </Link>
+                    ):(
+                      "Adopted" 
+                      
+                    
+                    )
+                    
+                    }
                   </Button>
                 </div>
               </Card>

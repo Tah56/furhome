@@ -8,8 +8,8 @@ const mainLayout = ({children}) => {
         <div>
             <Navbar></Navbar>
             {children}
-        <Footer></Footer>
              <ToastContainer></ToastContainer>
+        <Footer></Footer>
         </div>
     );
 };
