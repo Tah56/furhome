@@ -38,7 +38,7 @@ const PetDetails = ({ pets }) => {
     };
     
     const {data:token} = await authClient.token();
-    const res = await fetch("http://localhost:8000/list-pet", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/list-pet`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

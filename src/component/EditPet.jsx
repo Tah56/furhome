@@ -14,7 +14,7 @@ console.log(token);
       const formData = new FormData(e.currentTarget);
     const datas = Object.fromEntries(formData.entries())
     console.log(datas);
-    const res = await fetch(`http://localhost:8000/list-pets/${pets._id}`,{
+    const res = await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/list-pets/${pets._id}`,{
       method:"PATCH",
        headers: {
         "content-type": "application/json",

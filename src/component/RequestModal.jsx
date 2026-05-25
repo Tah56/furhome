@@ -13,7 +13,7 @@ export default function RequestModal({ datas, list }) {
     try {
       const { data: tokenData } = await authClient.token();
 
-      const res = await fetch(`http://localhost:8000/my-pet-requests/${list._id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/my-pet-requests/${list._id}`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",

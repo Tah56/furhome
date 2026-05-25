@@ -12,8 +12,8 @@ import { BiRightArrow, BiSolidRightArrow } from "react-icons/bi";
 const AllPets = async ({ search }) => {
      
      const url = search.search
-     ? `http://localhost:8000/all-pets?search=${search?.search}`
-     : `http://localhost:8000/all-pets`;
+     ? `${process.env.NEXT_PUBLIC_DB_URL}/all-pets?search=${search?.search}`
+     : `${process.env.NEXT_PUBLIC_DB_URL}/all-pets`;
      
    
   const res = await fetch(url);

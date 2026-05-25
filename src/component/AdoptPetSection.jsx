@@ -7,7 +7,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 
 
 const AdoptPetSection = async() => {
-    const res  = await fetch(`http://localhost:8000/all-pet`)
+    const res  = await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/all-pet`)
     const data = await res.json()
     console.log(data);
     

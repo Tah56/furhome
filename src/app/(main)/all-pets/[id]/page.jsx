@@ -15,7 +15,7 @@ const detailsPage = async({params}) => {
    console.log(token);
    
     const {id}= await  params
-    const res = await fetch(`http://localhost:8000/list-pets/${id}`,{
+    const res = await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/list-pets/${id}`,{
         headers:{
         authorization:`Bearer ${token}`
         }

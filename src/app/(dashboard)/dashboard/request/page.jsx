@@ -17,7 +17,7 @@ const RequestPage = async () => {
     headers: await headers()
   });
 
-  const res = await fetch(`http://localhost:8000/requsts?email=${user?.email}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/requsts?email=${user?.email}`, {
     headers: {
       authorization: `Bearer ${token}`
     },

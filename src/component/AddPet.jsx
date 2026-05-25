@@ -31,7 +31,7 @@ const AddPet = () => {
 
       const { data: token } = await authClient.token();
 
-      const res = await fetch("http://localhost:8000/list-pets", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/list-pets`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -41,7 +41,7 @@ const AddPet = () => {
       });
 
       const result = await res.json();
-console.log(token?.token);
+
 
       console.log(result);
       if (result.insertedId) {

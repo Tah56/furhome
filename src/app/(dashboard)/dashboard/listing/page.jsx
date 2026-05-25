@@ -17,7 +17,7 @@ const ListingPage = async () => {
     headers: await headers()
   });
 
-  const res = await fetch(`http://localhost:8000/listing/${user?.id}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/listing/${user?.id}`, {
     headers: {
       authorization: `Bearer ${token}`
     },
@@ -26,7 +26,7 @@ const ListingPage = async () => {
 
   const data = await res.json();
 
-  const response = await fetch(`http://localhost:8000/my-pet-requests/${user?.email}`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/my-pet-requests/${user?.email}`);
   const datas = await response.json();
 
   return (

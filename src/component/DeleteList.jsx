@@ -10,7 +10,7 @@ export function DeleteList({list}) {
     const deleted = async()=>{
       const {data:tokenData}= await authClient.token()
         
-        const res = await fetch(`http://localhost:8000/list-pets/${list._id}`,{
+        const res = await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/list-pets/${list._id}`,{
                   method: "DELETE",
       headers: {
         "content-type": "application/json",
@@ -18,7 +18,7 @@ export function DeleteList({list}) {
       },
         })
         
-        const response = await fetch(`http://localhost:8000/request/${list?._id}`,{
+        const response = await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/request/${list?._id}`,{
                   method: "DELETE",
       headers: {
         "content-type": "application/json",

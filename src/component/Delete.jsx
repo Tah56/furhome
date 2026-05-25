@@ -10,7 +10,7 @@ export function Delete({list}) {
     const deleted = async()=>{
       const {data:tokenData} = await authClient.token()
         
-        const res = await fetch(`http://localhost:8000/request/${list?.petId}`,{
+        const res = await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/request/${list?.petId}`,{
                   method: "DELETE",
       headers: {
         "content-type": "application/json",
