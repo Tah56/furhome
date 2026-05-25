@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { Heart, Mail, Phone, MapPin, MailIcon, PhoneIcon, MapPinIcon } from 'lucide-react';
+import { FaHeart, FaMapMarkerAlt, FaPhone } from 'react-icons/fa';
+import { IoIosMail } from 'react-icons/io';
 
 export default function Footer() {
   return (
@@ -19,7 +20,7 @@ export default function Footer() {
               Connecting loving pets with caring families across Bangladesh.
             </p>
             <div className="flex gap-4 mt-6">
-              <Heart className="text-purple-500" size={24} />
+            <FaHeart className="text-purple-500" size={24} />
             </div>
           </div>
 
@@ -50,15 +51,15 @@ export default function Footer() {
             <h3 className="text-white font-semibold mb-4">Get in Touch</h3>
             <div className="space-y-4 text-gray-400">
               <div className="flex items-center gap-3">
-                <MailIcon size={20} />
+                <IoIosMail size={20} />
                 <span>hello@furhome.bd</span>
               </div>
               <div className="flex items-center gap-3">
-                <PhoneIcon size={20} />
+                <FaPhone size={20} />
                 <span>+880 1712-345678</span>
               </div>
               <div className="flex items-center gap-3">
-                <MapPinIcon size={20} />
+                <FaMapMarkerAlt size={20} />
                 <span>Dhaka, Bangladesh</span>
               </div>
             </div>
