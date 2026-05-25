@@ -158,7 +158,9 @@ const AddPet = () => {
 
           <div className="md:col-span-2">
             <TextField name="imageUrl">
-              <Label>Image URL</Label>
+              <Label>Image URL<span class="text-gray-400 text-sm ml-1">
+      (Only Imgbb Photo Links)
+    </span></Label>
               <Input
                 type="url"
                 placeholder="https://example.com/pet-image.jpg"

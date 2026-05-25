@@ -27,7 +27,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'www.istockphoto.com',
+        hostname: 'i.ibb.co.com',
         pathname: '/**',
   
      

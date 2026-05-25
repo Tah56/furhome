@@ -7,6 +7,7 @@ import React from "react";
 import { CiHeart } from "react-icons/ci";
 import { FaRegClipboard } from "react-icons/fa";
 import { PiPlus } from "react-icons/pi";
+import { ToastContainer } from "react-toastify/unstyled";
 
 const dashboardlayout = ({ children }) => {
   return (
@@ -48,6 +49,7 @@ const dashboardlayout = ({ children }) => {
           </ul>
         </div>
       </div>
+      <ToastContainer></ToastContainer>
     </div>
   );
 };
