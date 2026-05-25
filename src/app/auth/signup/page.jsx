@@ -35,7 +35,7 @@ function signUpPage() {
       });
 
       console.log(data, error);
-      if (data) {
+      if (!error) {
         toast.success("sign up success");
         router.push("/");
       } else {
