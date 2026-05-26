@@ -55,5 +55,5 @@ FURHOME is a full-stack web application that connects loving pets with responsib
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/furhome.git
+   git clone [https://github.com/Tah56/furhome.git](https://github.com/Tah56/furhome.git)
    cd furhome
