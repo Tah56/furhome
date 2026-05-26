@@ -13,7 +13,7 @@ A modern and user-friendly pet adoption platform built for Bangladesh.
 FURHOME is a full-stack web application that connects loving pets with responsible adopters. It simplifies the pet adoption process by allowing users to browse pets, submit adoption requests, list their own pets for adoption, and manage everything through an intuitive dashboard.
 
 ## **Live URL**
-🔗 [https://furhome.vercel.app](https://furhome.vercel.app) *(Update with your actual deployed link)*
+🔗 [https://furhome-five.vercel.app](https://furhome-five.vercel.app) *(Update with your actual deployed link)*
 
 ---
 
@@ -33,10 +33,10 @@ FURHOME is a full-stack web application that connects loving pets with responsib
 
 - **Frontend**: Next.js 15 (App Router), TypeScript, Tailwind CSS
 - **UI Library**: HeroUI
-- **Authentication**: Auth.js
+- **Authentication**: BetterAuth
 - **Backend API**: Node.js / Express
 - **Database**: MongoDB
-- **Icons**: Lucide React & Gravity UI Icons
+- **Icons**:  React Icons & Gravity UI Icons
 
 ---
 
@@ -45,10 +45,8 @@ FURHOME is a full-stack web application that connects loving pets with responsib
 - `next`
 - `tailwindcss`
 - `@heroui/react`
-- `auth.js` (NextAuth)
+- `auth.js` (betterAuth)
 - `react-toastify`
-- `lucide-react`
-- `next/image`
 - `@gravity-ui/icons`
 
 ---
