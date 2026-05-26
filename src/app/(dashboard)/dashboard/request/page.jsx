@@ -41,7 +41,7 @@ const RequestPage = async () => {
             <p className="text-gray-500">You haven't applied for any pets yet.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
             {data.map((list) => (
               <div key={list._id} className="w-full">
                 <Card className="overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 rounded-3xl h-full flex flex-col">
@@ -64,7 +64,8 @@ const RequestPage = async () => {
 
                     <div className={`absolute top-4 left-4 px-4 py-1 rounded-full text-xs font-medium
                       ${list.status === "Accept" ? "bg-green-100 text-green-700" : "bg-amber-100 text-amber-700"}`}>
-                      {list.status === "Accept" ? "Adopted" : "Pending"}
+                      {list.status === "Accept" ? "Adopted" : list.status === "Reject" ? "Reject" : "Pending"}
+                      
                     </div>
                   </div>
 

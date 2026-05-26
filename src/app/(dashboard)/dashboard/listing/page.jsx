@@ -21,12 +21,14 @@ const ListingPage = async () => {
     headers: {
       authorization: `Bearer ${token}`
     },
-    cache: 'no-store'
+   
   });
 
   const data = await res.json();
 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/my-pet-requests/${user?.email}`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/my-pet-requests/${user?.email}`,{
+  cache: 'no-cache'
+  });
   const datas = await response.json();
 
   return (

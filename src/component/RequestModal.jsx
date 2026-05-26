@@ -9,17 +9,23 @@ export default function RequestModal({ datas, list }) {
   const router = useRouter();
   const filters = datas.filter((pet) => pet.petId === list._id);
 
-  const statusUpdate = async (newStatus) => {
+  console.log(filters);
+  
+  const statusUpdate = async (newStatus,pet) => {
+    console.log(pet.petId);
+    
     try {
       const { data: tokenData } = await authClient.token();
 
-      const res = await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/my-pet-requests/${list._id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_DB_URL}/my-pet-requests/${pet.petId}`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",
           authorization: `Bearer ${tokenData?.token}`,
         },
-        body: JSON.stringify({ status: newStatus }),
+        body: JSON.stringify({ status: newStatus,
+          email: pet.email
+         }),
       });
 
       if (res.ok) {
@@ -80,13 +86,13 @@ export default function RequestModal({ datas, list }) {
                     {pet.status !== "Accept" && pet.status !== "Reject" && (
                       <div className="flex gap-3 mt-5">
                         <Button 
-                          onClick={() => statusUpdate("Accept")}
+                          onClick={() => statusUpdate("Accept",pet)}
                           className="flex-1 bg-green-600 hover:bg-green-700 text-white rounded-2xl"
                         >
                           Accept
                         </Button>
                         <Button 
-                          onClick={() => statusUpdate("Reject")}
+                          onClick={() => statusUpdate("Reject",pet)}
                           variant="outline"
                           className="flex-1 border-red-500 text-red-600 hover:bg-red-50 rounded-2xl"
                         >

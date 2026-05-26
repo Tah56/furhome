@@ -13,8 +13,8 @@ const Filter = () => {
 
     router.push(
       value
-        ? `http://localhost:3000/all-pets?search=${value}`
-        : `http://localhost:3000/all-pets`,{},
+        ? `${process.env.NEXT_PUBLIC_FRONT_URL}/all-pets?search=${value}`
+        : `${process.env.NEXT_PUBLIC_FRONT_URL}/all-pets`,{},
     );
   };
 

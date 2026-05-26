@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 import Link from "next/link";
 import { BiPhone } from "react-icons/bi";
 import { BsMailbox } from "react-icons/bs";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { EditPage } from "./EditPet";
 
 
@@ -35,6 +35,7 @@ const PetDetails = ({ pets }) => {
       userId: user?.id,
       imageUrl: pets.imageUrl,
       status: "pending",
+      ownerImage: pets.image,
       createdAt: new Date().toLocaleDateString('en-GB')
     };
     
@@ -52,7 +53,7 @@ const PetDetails = ({ pets }) => {
 
     if (d.insertedId) {
       toast.success("Adoption request submitted! The owner will review it soon. 🐾");
-      redirect('/all-pets'); 
+      // redirect('/all-pets'); 
     } else {
       toast.error(d.message || "Something went wrong");
     }
@@ -137,15 +138,15 @@ const PetDetails = ({ pets }) => {
             <div className="bg-white rounded-2xl p-5 shadow-sm">
               <h2 className="font-semibold text-lg mb-4">About the Owner</h2>
               <div className="flex gap-4">
-                <div className="w-16 h-16 rounded-full overflow-hidden">
-                  <Image
-                    src={pets?.image}
-                    alt={pets.name}
-                    width={80}
-                    height={80}
-                     referrerPolicy="no-referrer"
-                    className="object-cover"
-                  />
+                <div className="w-16 h-16 rounded-full  overflow-hidden">
+                {pets.image? <Image
+                  src={pets?.image}
+                  alt={pets.name}
+                  width={80}
+                  height={80}
+                    referrerPolicy="no-referrer"
+                  className="object-cover"
+                /> :"🐾🐾 "}
                 </div>
                 <div>
                   <h3 className="font-semibold">{pets.ownerName || "Pet Owner"}</h3>
