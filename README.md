@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🐾 FURHOME - Pet Adoption Platform
 
-## Getting Started
+![FURHOME Banner](https://via.placeholder.com/1200x400/7C3AED/FFFFFF?text=FURHOME+Pet+Adoption)
 
-First, run the development server:
+A modern and user-friendly pet adoption platform built for Bangladesh.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## **Project Name**
+**FURHOME**
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## **Purpose**
+FURHOME is a full-stack web application that connects loving pets with responsible adopters. It simplifies the pet adoption process by allowing users to browse pets, submit adoption requests, list their own pets for adoption, and manage everything through an intuitive dashboard.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## **Live URL**
+🔗 [https://furhome.vercel.app](https://furhome.vercel.app) *(Update with your actual deployed link)*
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## **Features**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Browse & Search Pets** – Advanced filtering by species, breed, location, and gender
+- **Adoption Request System** – Users can send detailed adoption applications with personal information
+- **List Your Pet** – Easy form for pet owners to list their pets for adoption
+- **Personal Dashboard** – Manage listed pets and track all incoming adoption requests
+- **Request Management** – Pet owners can accept or reject adoption requests directly
+- **Responsive & Beautiful UI** – Modern purple-themed design that works perfectly on mobile and desktop
+- **Secure Authentication** – Protected routes and user session management
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## **Tech Stack**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Frontend**: Next.js 15 (App Router), TypeScript, Tailwind CSS
+- **UI Library**: HeroUI
+- **Authentication**: Auth.js
+- **Backend API**: Node.js / Express
+- **Database**: MongoDB
+- **Icons**: Lucide React & Gravity UI Icons
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## **NPM Packages Used**
+
+- `next`
+- `tailwindcss`
+- `@heroui/react`
+- `auth.js` (NextAuth)
+- `react-toastify`
+- `lucide-react`
+- `next/image`
+- `@gravity-ui/icons`
+
+---
+
+## **Installation**
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/furhome.git
+   cd furhome
